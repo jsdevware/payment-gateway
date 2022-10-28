@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+                <!-- popup box start from here -->
+<div id="popup_wrapper">
+    <div class="box">
+        <div class="text">*After you paid, you must come back here to submit the Ref/UTR No. (12 digits). Then your money is credited to your account.</div>
+        <div class="image"><img src="utr_example.png" alt="image" width="100%"></div>
+        <button onclick="document.querySelector('#popup_wrapper').style.display='none';">OK</button>
+    </div>
+</div>
+                <!-- popup box end here -->
+                
+                <!-- step 1 start from here -->
+<section id="step_1">
+    <div class="container">
+        <div class="title">Step 1 : Copy Amount and Back Account information</div>
+        <div class="wrapper">
+            <h5>Amount</h5>
+            <div class="right_item">
+                <input type="text" placeholder="Enter Amount" id="amount_input">
+                <button onclick="copyAmount()">Copy</button>
+            </div>
+        </div>
+        <hr>
+        <div class="wrapper">
+            <h5>Name</h5>
+            <div class="right_item">
+                <input type="text" placeholder="Enter Your Name" id="name_input">
+                <button onclick="copyName()">Copy</button>
+            </div>
+        </div>
+        <hr>
+        <div class="wrapper">
+            <h5>VPA/UPI</h5>
+            <div class="right_item">
+                <input type="text" placeholder="Enter VPA/UPI" id="vpa_input">
+                <button onclick="copyVPA()">Copy</button>
+            </div>
+        </div>
+    </div>
+</section>
+                <!-- step 1 end here -->
+
+                <!-- step 2 start from here -->
+<section id="step_2">
+    <div class="container">
+        <div class="title">Step 2 : Transfer and don't modify this amount to us</div>
+        <div class="item"><i class="bi bi-exclamation-triangle"></i> Please record your reference No. {Ref No.} after payment</div>
+    </div>
+</section>
+                <!-- step 2 end here -->
+
+                <!-- step 3 start from here -->
+<section id="step_3">
+    <div class="container">
+        <div class="title">Step 3 : Please enter Ref No. to complete the payment</div>
+        <div class="item"><i class="bi bi-exclamation-triangle"></i> Be sure to return this page to fill the UTR numbers after you have completed your payment</div>
+        <form name="upiForm" action="" onsubmit="return valid_upi_form()" method="post">
+            <input type="text" id="refCode" placeholder="UTR (UPI Ref. ID) must be 12 digits">
+            <input type="submit" value="Submit UTR">
+        </form>
+    </div>
+</section>
+                <!-- step 3 end here -->
+</body>
+</html>
+
+
+                <!-- css codes start from here -->
+<style>
+
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {font-family: calibri; font-size: 20px;}
+hr {border: none; height: 1px; background: #eee;}
+::-webkit-scrollbar {display: none;}
+section {padding: 10px;}
+.container {border: 1px dashed #F53193;}
+    
+    /* codes for popup box */
+#popup_wrapper {position: fixed; width: 100%; height: 100%; background: #00000050;}
+#popup_wrapper .box {position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 400px; height: 70%; background: #fff; overflow: hidden; border-radius: 8px; padding-bottom: 20px;}
+#popup_wrapper .box .text {padding: 10px; font-weight: bold;}
+#popup_wrapper .box .image {height: 85%; overflow: scroll;}
+#popup_wrapper button {position: absolute; bottom: 0; left: 0; width: 100%; padding: 5px; border: none; background: #F53193; color: #fff; font-size: 20px; cursor: pointer;}
+
+    /* codes for step 1 */
+#step_1 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_1 .wrapper {display: flex;justify-content: space-between; padding: 5px 10px;}
+#step_1 .wrapper h5 {color: #F53193;}
+#step_1 .wrapper .right_item {display: flex;}
+#step_1 .wrapper .right_item input {background: none; border: none; outline: none; width: 150px; padding-right: 20px;}
+#step_1 .wrapper .right_item button {cursor: pointer; background: #F53193; color: #fff; border: none; padding: 5px 10px; border-radius: 3px;}
+    
+    /* codes for step 2 */
+#step_2 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_2 .item {padding: 5px 10px; font-size: initial;}
+#step_2 .item i {color: #F53193;}
+    
+    /* codes for step 3 */
+#step_3 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_3 .item {padding: 5px 10px; font-size: initial;}
+#step_3 .item i {color: #F53193;}
+#step_3 input[type="text"] {background: none; border: none; outline: none; width: 100%; padding: 10px 20px;}
+#step_3 input[type="submit"] {background: none; border: none; width: 90%; box-shadow: 0 0 10px #ddd; padding: 10px; margin: 10px 5%; cursor: pointer; border-radius: 10px; transition: all 0.3s;}
+#step_3 input[type="submit"]:hover {background: #F53193; color: #fff;}
+
+    /* codes for responsive */
+@media screen and (max-width: 768px) {
+    #popup_wrapper .box {height: 80%; top: 10%;}
+}
+
+@media screen and (max-width: 425px) {
+    #popup_wrapper .box {width: 95%;}
+}
+</style>
+                <!-- css codes end here -->
+
+                <!-- js codes start from here -->
+<script>
+    // copy amount 
+    function copyAmount() {
+        var copyText = document.getElementById("amount_input");
+
+        copyText.select(); // for desktop
+        copyText.setSelectionRange(0, 99999); // for mobile
+        navigator.clipboard.writeText(copyText.value); // copied to clipboard
+        alert("Copied the text: " + copyText.value); // get alert
+    }
+
+    // copy name 
+    function copyName() {
+        var copyText = document.getElementById("name_input");
+
+        copyText.select(); // for desktop
+        copyText.setSelectionRange(0, 99999); // for mobile
+        navigator.clipboard.writeText(copyText.value); // copied to clipboard
+        alert("Copied the text: " + copyText.value); // get alert
+    }
+
+    // copy vpa/upi 
+    function copyVPA() {
+        var copyText = document.getElementById("vpa_input");
+
+        copyText.select(); // for desktop
+        copyText.setSelectionRange(0, 99999); // for mobile
+        navigator.clipboard.writeText(copyText.value); // copied to clipboard
+        alert("Copied the text: " + copyText.value); // get alert
+    }
+
+    // UPI form validation
+    function valid_upi_form() {
+        let reference = document.getElementById("refCode").value;
+        let countRef = reference.length;
+
+        if (countRef != 12) {
+            alert("Please input 12 digit reference code");
+            return false;
+        } else {
+            alert("payment succeed!")
+            return false;
+        }
+    }
+</script>
+                <!-- js codes end here -->
