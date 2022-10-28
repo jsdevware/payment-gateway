@@ -9,13 +9,13 @@
 </head>
 <body>
                 <!-- popup box start from here -->
-<div id="popup_wrapper">
+<!-- <div id="popup_wrapper">
     <div class="box">
         <div class="text">*After you paid, you must come back here to submit the Ref/UTR No. (12 digits). Then your money is credited to your account.</div>
         <div class="image"><img src="utr_example.png" alt="image" width="100%"></div>
         <button onclick="document.querySelector('#popup_wrapper').style.display='none';">OK</button>
     </div>
-</div>
+</div> -->
                 <!-- popup box end here -->
                 
                 <!-- step 1 start from here -->
@@ -70,6 +70,7 @@
     </div>
 </section>
                 <!-- step 3 end here -->
+<footer><h3>Safe and Faith</h3></footer>
 </body>
 </html>
 
@@ -82,35 +83,38 @@ body {font-family: calibri; font-size: 20px;}
 hr {border: none; height: 1px; background: #eee;}
 ::-webkit-scrollbar {display: none;}
 section {padding: 10px;}
-.container {border: 1px dashed #F53193;}
+.container {border: 1px dashed dodgerblue;}
     
     /* codes for popup box */
 #popup_wrapper {position: fixed; width: 100%; height: 100%; background: #00000050;}
 #popup_wrapper .box {position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 400px; height: 70%; background: #fff; overflow: hidden; border-radius: 8px; padding-bottom: 20px;}
 #popup_wrapper .box .text {padding: 10px; font-weight: bold;}
 #popup_wrapper .box .image {height: 85%; overflow: scroll;}
-#popup_wrapper button {position: absolute; bottom: 0; left: 0; width: 100%; padding: 5px; border: none; background: #F53193; color: #fff; font-size: 20px; cursor: pointer;}
+#popup_wrapper button {position: absolute; bottom: 0; left: 0; width: 100%; padding: 5px; border: none; background: dodgerblue; color: #fff; font-size: 20px; cursor: pointer;}
 
     /* codes for step 1 */
-#step_1 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_1 .title {background: dodgerblue; padding: 5px; margin: 3px; color: #fff;}
 #step_1 .wrapper {display: flex;justify-content: space-between; padding: 5px 10px;}
-#step_1 .wrapper h5 {color: #F53193;}
+#step_1 .wrapper h5 {color: dodgerblue;}
 #step_1 .wrapper .right_item {display: flex;}
-#step_1 .wrapper .right_item input {background: none; border: none; outline: none; width: 150px; padding-right: 20px;}
-#step_1 .wrapper .right_item button {cursor: pointer; background: #F53193; color: #fff; border: none; padding: 5px 10px; border-radius: 3px;}
+#step_1 .wrapper .right_item input {background: none; color: goldenrod; border: none; outline: none; width: 150px; padding-right: 20px;}
+#step_1 .wrapper .right_item input::placeholder {color: goldenrod;}
+#step_1 .wrapper .right_item button {cursor: pointer; background: dodgerblue; color: #fff; border: none; padding: 5px 10px; border-radius: 3px;}
     
     /* codes for step 2 */
-#step_2 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_2 .title {background: dodgerblue; padding: 5px; margin: 3px; color: #fff;}
 #step_2 .item {padding: 5px 10px; font-size: initial;}
-#step_2 .item i {color: #F53193;}
+#step_2 .item i {color: dodgerblue;}
     
     /* codes for step 3 */
-#step_3 .title {background: #F53193; padding: 5px; margin: 3px; color: #fff;}
+#step_3 .title {background: dodgerblue; padding: 5px; margin: 3px; color: #fff;}
 #step_3 .item {padding: 5px 10px; font-size: initial;}
-#step_3 .item i {color: #F53193;}
+#step_3 .item i {color: dodgerblue;}
 #step_3 input[type="text"] {background: none; border: none; outline: none; width: 100%; padding: 10px 20px;}
 #step_3 input[type="submit"] {background: none; border: none; width: 90%; box-shadow: 0 0 10px #ddd; padding: 10px; margin: 10px 5%; cursor: pointer; border-radius: 10px; transition: all 0.3s;}
-#step_3 input[type="submit"]:hover {background: #F53193; color: #fff;}
+#step_3 input[type="submit"]:hover {background: dodgerblue; color: #fff;}
+
+footer h3 {text-align: center; color: #ddd; margin-top: 20px;}
 
     /* codes for responsive */
 @media screen and (max-width: 768px) {
