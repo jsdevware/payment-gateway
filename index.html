@@ -22,7 +22,7 @@
                 <!-- step 1 start from here -->
 <section id="step_1">
     <!-- alert -->
-    <div class="copyAlert">Text Copied! <button onclick="document.querySelector('#step_1 .copyAlert').classList.remove('active');">X</button></div>
+    <div class="copyAlert">Text Copied!</div>
     <div class="-container">
         <div class="title">Step 1 : Copy Amount and Back Account information</div>
         <div class="wrapper">
@@ -64,9 +64,10 @@
                 <!-- step 3 start from here -->
 <section id="step_3">
     <!-- error message -->
-    <div class="errMsg">Please input 12 digit reference code <button onclick="document.querySelector('#step_3 .errMsg').classList.remove('active');">X</button></div>
+    <div class="errMsg">Please input 12 digit reference code</div>
     <!-- success message -->
-    <div class="sucMsg">succeed! <button onclick="document.querySelector('#step_3 .sucMsg').classList.remove('active');">X</button></div>
+    <div class="succMsg">succeed!</div>
+        <!-- main -->
     <div class="-container">
         <div class="title">Step 3 : Please enter Ref No. to complete the payment</div>
         <div class="item"><i class="bi bi-exclamation-triangle"></i> Be sure to return this page to fill the UTR numbers after you have completed your payment</div>
@@ -87,8 +88,11 @@
         // copy elements
     function copyText(element) {
         var copyText = document.getElementById(element).innerText;
+        var copyAlert = document.querySelector("#step_1 .copyAlert");
+
         navigator.clipboard.writeText(copyText);
-        document.querySelector("#step_1 .copyAlert").classList.add("active");
+        copyAlert.classList.add("active");
+        setTimeout(function() {copyAlert.classList.remove("active")}, 1500);
     }
 
     // get data 
@@ -107,12 +111,16 @@
     function valid_upi_form() {
         let reference = document.getElementById("refCode").value;
         let countRef = reference.length;
+        let err = document.querySelector("#step_3 .errMsg");
+        let succ = document.querySelector("#step_3 .succMsg");
 
         if (countRef != 12) {
-            document.querySelector("#step_3 .errMsg").classList.add("active");
+            err.classList.add("active");
+            setTimeout(function() {err.classList.remove("active")}, 1500);
             return false;
         } else {
-            document.querySelector("#step_3 .sucMsg").classList.add("active");
+            succ.classList.add("active");
+            setTimeout(function() {succ.classList.remove("active")}, 1500);
             return false;
         }
     }
